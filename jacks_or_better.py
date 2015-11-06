@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import random
+import signal   # Capture ctrl-c
 
 #list_of_suits = ["H","D","S","C"]
 list_of_suits = [u'\u2665',u'\u2666',u'\u2660',u'\u2663']
@@ -201,7 +202,13 @@ def Main() :
             keep_playing = False
 
 
+# Capture ctrl-c
+def signal_handler (signal, frame):
+    print ("\n\nThanks for playing Jacks or Better.\nhttps://github.com/JasonPodgorny/python-jacks_or_better\n")
+    exit (0)
+
 ### Begin The Game
+signal.signal(signal.SIGINT, signal_handler)
 
 # New object for deck of cards
 deck = CardDeck()
