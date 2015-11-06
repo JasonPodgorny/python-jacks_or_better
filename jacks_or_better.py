@@ -26,7 +26,7 @@ class CardDeck:
     def initialize_deck(self):
         self.card_list = []
         for suit in list_of_suits:
-            for card in range(0,13):
+            for card in range(0,len(list_of_cards)):
                 self.card_list.append([card, suit])
 
     def deal_card(self,num):
@@ -53,7 +53,6 @@ def check_hand(player_hand):
     # Create Hand Histogram
     hand_histogram = [int(0)] * 13
     for cards in player_hand:
-        pos_to_increment = int(cards[0])
         hand_histogram[int(cards[0])] += 1
 
     # Check for pairings
@@ -72,6 +71,7 @@ def check_hand(player_hand):
     straight = False
     flush = False
     straight_flush = False
+
     # Check For Straight
     for straight_start in range(0,10):
         if hand_histogram[straight_start:straight_start+5] == [1,1,1,1,1]:
@@ -97,7 +97,7 @@ def check_hand(player_hand):
         hand_type = 'Straight Flush'
 
     # Check For Royal Flush
-    if straight_flush and sorted(player_hand)[0][0] == 10:
+    if straight_flush and sorted(player_hand)[0][0] == 8:
         hand_type = 'Royal Flush'
 
     wager_multiplier = dict_of_payouts[hand_type]
