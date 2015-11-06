@@ -2,7 +2,8 @@
 
 import random
 
-list_of_suits = ["H","D","S","C"]
+#list_of_suits = ["H","D","S","C"]
+list_of_suits = [u'\u2665',u'\u2666',u'\u2660',u'\u2663']
 list_of_cards = ["2","3","4","5","6","7","8","9","T","J","Q","K","A"]
 dict_of_payouts = {
     'none': 0,
