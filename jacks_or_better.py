@@ -6,7 +6,7 @@ import random
 list_of_suits = [u'\u2665',u'\u2666',u'\u2660',u'\u2663']
 list_of_cards = ["2","3","4","5","6","7","8","9","T","J","Q","K","A"]
 dict_of_payouts = {
-    'none': 0,
+    'None': 0,
     'One Pair': 1,
     'Two Pairs': 2,
     'Three Of A Kind': 3,
@@ -48,7 +48,7 @@ class Player:
 
 def check_hand(player_hand):
 
-    hand_type = 'none'
+    hand_type = 'None'
 
     # Create Hand Histogram
     hand_histogram = [int(0)] * 13
@@ -73,26 +73,15 @@ def check_hand(player_hand):
     flush = False
     straight_flush = False
     # Check For Straight
-    straight_hists = [
-                     [1,1,1,1,0,0,0,0,0,0,0,0,1],
-                     [1,1,1,1,1,0,0,0,0,0,0,0,0],
-                     [0,1,1,1,1,1,0,0,0,0,0,0,0],
-                     [0,1,1,1,1,1,0,0,0,0,0,0,0],
-                     [0,0,1,1,1,1,1,0,0,0,0,0,0],
-                     [0,0,0,1,1,1,1,1,0,0,0,0,0],
-                     [0,0,0,0,1,1,1,1,1,0,0,0,0],
-                     [0,0,0,0,0,1,1,1,1,1,0,0,0],
-                     [0,0,0,0,0,0,1,1,1,1,1,0,0],
-                     [0,0,0,0,0,0,0,1,1,1,1,1,0],
-                     [0,0,0,0,0,0,0,0,1,1,1,1,1]
-                     ]
-    for straights in straight_hists:
-        if hand_histogram == straights:
+    for straight_start in range(0,10):
+        if hand_histogram[straight_start:straight_start+5] == [1,1,1,1,1]:
             straight = True
             hand_type = 'Straight'
+    if hand_histogram[0:4] == [1,1,1,1] and hand_histogram[12] == 1:
+        straight = True
+        hand_type = 'Straight'
 
     # Check For Flush
-    list_of_suits = ["Heart", "Diamond", "Spade", "Club"]
     for suit in list_of_suits:
         suit_count = 0
         for card in player_hand:
@@ -150,12 +139,12 @@ def Main() :
         
         # Print Current Bankroll And Ask For Wager
         print "Current bankroll: ", player.money
+        print
         player_wager = raw_input("How much would you like to wager? ")
 
         # Check Wager Is Appropriate Value
         while player_wager.isdigit() == False or int(player_wager) > player.money or int(player_wager) == 0:
-            print "Invalid input.  Must be a number between 1 and %s\n" % player.money
-            print "Current bankroll: ", player.money
+            print "Invalid input.  Must be a number between 1 and %s" % player.money
             player_wager = raw_input("How much would you like to wager? ")
 
         # Initialize The Deck
