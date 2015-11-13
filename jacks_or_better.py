@@ -3,9 +3,15 @@
 import random
 import signal   # Capture ctrl-c
 
-#list_of_suits = ["H","D","S","C"]
-list_of_suits = [u'\u2665',u'\u2666',u'\u2660',u'\u2663']
+try:
+    print u'\u2665' + " Welcome To Jacks Or Better " + u'\u2665' + "\n"
+    list_of_suits = [u'\u2665',u'\u2666',u'\u2660',u'\u2663']
+except UnicodeEncodeError:
+    print "* Welcome To Jacks Or Better *\n"
+    list_of_suits = ["H","D","S","C"]
+
 list_of_cards = ["2","3","4","5","6","7","8","9","T","J","Q","K","A"]
+
 dict_of_payouts = {
     'None': 0,
     'One Pair': 1,
